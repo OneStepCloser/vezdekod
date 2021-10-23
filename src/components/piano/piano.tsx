@@ -3,7 +3,7 @@ import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react'
 import Octave from '../octave/octave';
 import { KeyPressedPayload, OctaveNumber } from '../octave/types';
 import { NOTE } from '../key/types';
-import { keyboardKeyToKeyMap, keyToKeyboardKeyMap } from '../../constants';
+import { keyboardKeyToKeyMap, keyToKeyboardKeyMap, russianToEnglishMap } from '../../constants';
 
 import './piano.scss';
 
@@ -50,7 +50,7 @@ export default function Piano () {
             return;
         }
 
-        const letter = e.key;
+        const letter = russianToEnglishMap[e.key] || e.key;
 
         if (!(letter in keyboardKeyToKeyMap)) {
             return;
@@ -65,7 +65,7 @@ export default function Piano () {
             return;
         }
 
-        const letter = e.key;
+        const letter = russianToEnglishMap[e.key] || e.key;
 
         if (!(letter in keyboardKeyToKeyMap)) {
             return;
