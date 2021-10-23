@@ -26,7 +26,12 @@ export default function Octave (props: Props) {
     return (
         <div className="octave">
             {octave.slice(0, notesCountIsValid ? notesCount : defaultNotesCount).map(note => (
-                <Key note={note} key={note} onClick={handleKeyClick}/>
+                <Key
+                    note={note}
+                    key={note}
+                    octaveNumber={octaveNumber}
+                    onClick={handleKeyClick}
+                />
             ))}
         </div>
     )

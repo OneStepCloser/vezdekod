@@ -5,7 +5,6 @@ import { KeyPressedPayload } from '../octave/types';
 
 import './piano.scss';
 
-
 export default function Piano () {
     const handleKeyPressed = useCallback((payload: KeyPressedPayload) => {
         console.log('KEY PRESSED', payload);
