@@ -8,6 +8,7 @@ import './octave.scss';
 interface Props {
     octaveNumber: OctaveNumber;
     notesCount?: number;
+    activeKeys: KeyPressedPayload[];
     onKeyPressed: (payload: KeyPressedPayload) => void;
 }
 
@@ -16,23 +17,30 @@ const octave = [NOTE.C, NOTE.D_B, NOTE.D, NOTE.E_B, NOTE.E, NOTE.F, NOTE.G_B, NO
 const defaultNotesCount = octave.length;
 
 export default function Octave (props: Props) {
-    const { octaveNumber, notesCount = defaultNotesCount, onKeyPressed } = props;
+    const { octaveNumber, notesCount = defaultNotesCount, activeKeys, onKeyPressed } = props;
     const notesCountIsValid = notesCount >= 1 && notesCount <= octave.length;
 
-    const handleKeyClick = useCallback((note: NOTE) => {
+    const handleKeyPress = useCallback((note: NOTE) => {
         onKeyPressed({note, octaveNumber})
     }, [onKeyPressed, octaveNumber]);
 
     return (
         <div className="octave">
-            {octave.slice(0, notesCountIsValid ? notesCount : defaultNotesCount).map(note => (
-                <Key
-                    note={note}
-                    key={note}
-                    octaveNumber={octaveNumber}
-                    onClick={handleKeyClick}
-                />
-            ))}
+            {octave.slice(0, notesCountIsValid ? notesCount : defaultNotesCount).map(note => {
+                const isActive = activeKeys.some(payload =>
+                    payload.octaveNumber === octaveNumber && payload.note === note
+                );
+
+                return (
+                    <Key
+                        note={note}
+                        key={note}
+                        octaveNumber={octaveNumber}
+                        isActive={isActive}
+                        onPress={handleKeyPress}
+                    />
+                )
+            })}
         </div>
     );
 }

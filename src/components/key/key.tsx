@@ -2,14 +2,15 @@ import React, { useMemo } from 'react';
 import b from 'b_';
 import { NOTE } from './types';
 import { OctaveNumber } from '../octave/types';
-import { keyboardKeyMap } from '../../constants';
+import { keyToKeyboardKeyMap } from '../../constants';
 
 import './key.scss';
 
 interface Props {
     note: NOTE;
     octaveNumber: OctaveNumber;
-    onClick: (note: NOTE) => void;
+    isActive: boolean;
+    onPress: (note: NOTE) => void;
 }
 
 enum NOTE_TYPE {
@@ -26,13 +27,13 @@ function getTypeByNote (note: NOTE) {
 }
 
 export default function Key (props: Props) {
-    const { note, octaveNumber, onClick } = props;
+    const { note, octaveNumber, isActive, onPress } = props;
 
     const type = useMemo(() => getTypeByNote(note), [note]);
-    const label = useMemo(() => keyboardKeyMap[octaveNumber][note], [octaveNumber, note]);
+    const label = useMemo(() => keyToKeyboardKeyMap[octaveNumber][note], [octaveNumber, note]);
 
     return (
-        <button className={b('key', {type})} onClick={() => onClick(note)}>
+        <button className={b('key', {type, active: isActive})} onMouseDown={() => onPress(note)}>
             <span className="key__label">{label?.toUpperCase()}</span>
         </button>
     )
