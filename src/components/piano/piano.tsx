@@ -9,9 +9,11 @@ import './piano.scss';
 
 function usePrevious(value: any): any {
     const ref = useRef();
+
     useEffect(() => {
         ref.current = value;
     });
+    
     return ref.current;
 }
 
