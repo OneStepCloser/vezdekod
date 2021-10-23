@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { NOTE } from '../key/types';
 import Key from '../key/key';
-import {KeyPressedPayload, OctaveNumber} from './types';
+import { KeyPressedPayload, OctaveNumber } from './types';
 
 import './octave.scss';
 
@@ -34,5 +34,5 @@ export default function Octave (props: Props) {
                 />
             ))}
         </div>
-    )
+    );
 }

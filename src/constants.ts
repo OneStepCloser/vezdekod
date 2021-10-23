@@ -1,5 +1,5 @@
 import { OctaveNumber } from './components/octave/types';
-import {NOTE} from './components/key/types';
+import { NOTE } from './components/key/types';
 
 export const keyboardKeyMap: Record<OctaveNumber, Partial<Record<NOTE, string>>> = {
     3: {
