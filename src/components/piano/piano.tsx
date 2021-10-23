@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useState, useMemo, useRef } from 'react';
 
 import Octave from '../octave/octave';
-import { KeyPressedPayload } from '../octave/types';
+import { KeyPressedPayload, OctaveNumber } from '../octave/types';
+import { NOTE } from '../key/types';
 import { keyboardKeyToKeyMap, keyToKeyboardKeyMap } from '../../constants';
 
 import './piano.scss';
@@ -14,10 +15,14 @@ function usePrevious(value: any): any {
     return ref.current;
 }
 
+function getKeyId (octaveNumber: OctaveNumber, note: NOTE) {
+    return `${note}${octaveNumber}`;
+}
+
 export default function Piano () {
     const [activeLetters, setActiveLetters] = useState<string[]>([]);
 
-    const activeKeys = useMemo(() =>
+    const activeKeys = useMemo<KeyPressedPayload[]>(() =>
         activeLetters.map(letter => keyboardKeyToKeyMap[letter]), [activeLetters]);
 
     const addLetter = useCallback((letter: string) => {
@@ -85,6 +90,25 @@ export default function Piano () {
     const prevHandleMouseUp = usePrevious(handleMouseUp);
     const prevHandleKeyDown = usePrevious(handleKeyDown);
     const prevHandleKeyUp = usePrevious(handleKeyUp);
+    const prevActiveKeys: KeyPressedPayload[] = usePrevious(activeKeys);
+
+    useEffect(() => {
+        if (!prevActiveKeys || activeLetters.length < prevActiveKeys.length) {
+            return;
+        }
+
+        const newKeys = activeKeys.filter(payload => {
+            const existsInPrev = prevActiveKeys.some(payloadInPrev =>
+                payloadInPrev.octaveNumber === payload.octaveNumber && payloadInPrev.note === payload.note);
+
+            return !existsInPrev;
+        });
+
+        newKeys.forEach(payload => {
+            const mySound = new Audio(`/sounds/Piano.ff.${getKeyId(payload.octaveNumber, payload.note)}.mp3`);
+            mySound.play();
+        })
+    }, [activeKeys]);
 
     useEffect(() => {
         if (prevHandleMouseUp !== handleMouseUp) {

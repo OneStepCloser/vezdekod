@@ -21,26 +21,30 @@ export default function Octave (props: Props) {
     const notesCountIsValid = notesCount >= 1 && notesCount <= octave.length;
 
     const handleKeyPress = useCallback((note: NOTE) => {
-        onKeyPressed({note, octaveNumber})
+        onKeyPressed({note, octaveNumber});
     }, [onKeyPressed, octaveNumber]);
 
-    return (
-        <div className="octave">
-            {octave.slice(0, notesCountIsValid ? notesCount : defaultNotesCount).map(note => {
-                const isActive = activeKeys.some(payload =>
-                    payload.octaveNumber === octaveNumber && payload.note === note
-                );
+    const finalNotesCount = notesCountIsValid ? notesCount : defaultNotesCount;
 
-                return (
-                    <Key
-                        note={note}
-                        key={note}
-                        octaveNumber={octaveNumber}
-                        isActive={isActive}
-                        onPress={handleKeyPress}
-                    />
-                )
-            })}
-        </div>
+    return (
+        <>
+            <div className="octave">
+                {octave.slice(0, finalNotesCount).map(note => {
+                    const isActive = activeKeys.some(payload =>
+                        payload.octaveNumber === octaveNumber && payload.note === note
+                    );
+
+                    return (
+                        <Key
+                            key={note}
+                            note={note}
+                            octaveNumber={octaveNumber}
+                            isActive={isActive}
+                            onPress={handleKeyPress}
+                        />
+                    )
+                })}
+            </div>
+        </>
     );
 }
