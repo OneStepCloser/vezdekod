@@ -1,0 +1,28 @@
+@import "../../assets/styles/colors.scss";
+
+.piano {
+  $padding: 30px;
+
+  background-color: $pianoDark;
+  padding: 0 $padding $padding $padding;
+  border-radius: 0 0 10px 10px;
+  box-shadow: inset 3px -3px 1px rgba(255, 255, 255, 0.2), 10px 10px 50px black;
+
+  &__top {
+    $height: 80px;
+
+    font-size: 16px;
+    width: calc(100% + #{$padding} * 2);
+    margin-left: -$padding;
+    height: $height;
+    background-color: $pianoDark;
+    box-shadow: inset 3px -3px 1px rgba(255, 255, 255, 0.2);
+    text-align: center;
+    line-height: $height;
+    color: #a58d47;
+  }
+
+  &__octaves {
+    display: flex;
+  }
+}
