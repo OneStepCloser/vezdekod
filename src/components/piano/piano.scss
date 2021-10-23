@@ -11,7 +11,7 @@
   &__top {
     $height: 80px;
 
-    font-size: 16px;
+    font-size: 36px;
     width: calc(100% + #{$padding} * 2);
     margin-left: -$padding;
     height: $height;
@@ -20,6 +20,7 @@
     text-align: center;
     line-height: $height;
     color: #a58d47;
+    font-family: AdineKirnberg, sans-serif;
   }
 
   &__octaves {
