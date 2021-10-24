@@ -89,19 +89,18 @@ export default function Piano () {
     useEffect(() => {
         if (prevHandleMouseUp !== handleMouseUp) {
             window.removeEventListener('mouseup', prevHandleMouseUp);
+            window.addEventListener('mouseup', handleMouseUp, true);
         }
 
         if (prevHandleKeyDown !== handleKeyDown) {
             window.removeEventListener('keydown', prevHandleKeyDown);
+            window.addEventListener('keydown', handleKeyDown, true);
         }
 
         if (prevHandleKeyUp !== handleKeyUp) {
             window.removeEventListener('keyup', prevHandleKeyUp);
+            window.addEventListener('keyup', handleKeyUp, true);
         }
-
-        window.addEventListener('mouseup', handleMouseUp, true);
-        window.addEventListener('keydown', handleKeyDown, true);
-        window.addEventListener('keyup', handleKeyUp, true);
 
         return function () {
             window.removeEventListener('mouseup', handleMouseUp);
