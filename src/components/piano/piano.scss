@@ -2,6 +2,7 @@
 
 .piano {
   $padding: 30px;
+  $topHeight: 80px;
 
   background-color: $pianoDark;
   padding: 0 $padding $padding $padding;
@@ -9,18 +10,66 @@
   box-shadow: inset 3px -3px 1px rgba(255, 255, 255, 0.2), 10px 10px 50px black;
 
   &__top {
-    $height: 80px;
-
-    font-size: 36px;
     width: calc(100% + #{$padding} * 2);
     margin-left: -$padding;
-    height: $height;
+    height: $topHeight;
     background-color: $pianoDark;
     box-shadow: inset 3px -3px 1px rgba(255, 255, 255, 0.2);
     text-align: center;
-    line-height: $height;
+
     color: #a58d47;
+    position: relative;
+  }
+
+  &__title {
     font-family: AdineKirnberg, sans-serif;
+    font-size: 36px;
+    line-height: $topHeight;
+  }
+
+  &__buttons {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+  }
+
+  &__play-button,
+  &__upload-file-button {
+    box-sizing: border-box;
+    padding: 8px;
+    background-color: $pianoDark;
+    display: block;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid #a58d47;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+    outline: none;
+
+    &:hover {
+      background-color: lighten($pianoDark, 5%);
+    }
+  }
+
+  &__play-button {
+    background-image: url("../../assets/images/play.svg");
+    margin-right: 8px;
+    background-size: 40%;
+  }
+
+  &__upload-file-button {
+    background-image: url("../../assets/images/upload.svg");
+    background-size: 60%;
+  }
+
+  &__upload-file-input {
+    display: none;
   }
 
   &__octaves {

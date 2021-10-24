@@ -1,7 +1,7 @@
 import { KeyPressedPayload, OctaveNumber } from './components/octave/types';
 import { NOTE } from './components/key/types';
 
-enum LETTER {
+export enum LETTER {
     Q = 'q',
     W = 'w',
     E = 'e',
@@ -22,6 +22,10 @@ enum LETTER {
     NINE = '9',
     ZERO = '0',
     EQUALS = '=',
+    K = 'k',
+    L = 'l',
+    SEMICOLON = ';',
+    QUOTE = '\'',
 }
 
 export const russianToEnglishMap: Record<string, LETTER> = {
@@ -37,6 +41,10 @@ export const russianToEnglishMap: Record<string, LETTER> = {
     'з': LETTER.P,
     'х': LETTER.LEFT_BRACKET,
     'ъ': LETTER.RIGHT_BRACKET,
+    'л': LETTER.K,
+    'д': LETTER.L,
+    'ж': LETTER.SEMICOLON,
+    'э': LETTER.QUOTE,
 };
 
 export const keyToKeyboardKeyMap: Record<OctaveNumber, Partial<Record<NOTE, LETTER>>> = {
@@ -60,9 +68,13 @@ export const keyToKeyboardKeyMap: Record<OctaveNumber, Partial<Record<NOTE, LETT
         [NOTE.E]: LETTER.P,
         [NOTE.F]: LETTER.LEFT_BRACKET,
         [NOTE.G]: LETTER.RIGHT_BRACKET,
+        [NOTE.A]: LETTER.L,
+        [NOTE.B]: LETTER.QUOTE,
         [NOTE.D_B]: LETTER.NINE,
         [NOTE.E_B]: LETTER.ZERO,
         [NOTE.G_B]: LETTER.EQUALS,
+        [NOTE.A_B]: LETTER.K,
+        [NOTE.B_B]: LETTER.SEMICOLON,
     }
 };
 
