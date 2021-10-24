@@ -13,7 +13,7 @@ function usePrevious(value: any): any {
     useEffect(() => {
         ref.current = value;
     });
-    
+
     return ref.current;
 }
 
@@ -110,7 +110,7 @@ export default function Piano () {
             const mySound = new Audio(`/sounds/Piano.ff.${getKeyId(payload.octaveNumber, payload.note)}.mp3`);
             mySound.play();
         })
-    }, [activeKeys]);
+    }, [activeKeys, activeLetters.length]);
 
     useEffect(() => {
         if (prevHandleMouseUp !== handleMouseUp) {
